@@ -12,11 +12,30 @@ Af=[-inv(C)*Y inv(C)*K;
     -inv(L)*K' -inv(L)*Zi];
 x0=[];
 for i=1:c
-    a=input(sprintf('Enter intial value of voltage in branch %d ',t(i,2)));
+    a=input(sprintf('Enter initial value of voltage in branch %d ',t(i,2)));
     x0=[x0 a];
 end
 for i=1:ll
     a=input(sprintf('Enter inital value of current in branch %d ',l(s+r+i,2)));
     x0=[x0 a];
 end
+u=[];
+for i=1:size(l)
+    a=input(sprintf('Enter current value in branch %d ',l(i,2)));
+    if(i<=(s+r))
+        u=[u a];
+    else
+        u=[u 0];
+    end
+end
+
+for i=1:size(t)
+    a=input(sprintf('Enter volatge source in branch %d ',t(i,2)));
+    if(i<=c)
+        u=[u 0];
+    else
+        u=[u a];
+    end
+end
+u=u';
 [t x]=ode45('check',[0 10],x0,[],Af);
