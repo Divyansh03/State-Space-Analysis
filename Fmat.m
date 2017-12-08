@@ -8,12 +8,12 @@ t=sortrows(t,1);
 At=A(:, t(:,2)');
 Al=A(:,l(:,2)');
 F=-(inv(At)*Al)';%Calculating F matrix
-s=find(l(:,1)==0,1)-1;
-c=find(t(:,1)==0,1)-1;
-r=find(l(:,1)==1,1)-s-1;
-g=find(t(:,1)==1,1)-c-1;
-ll=size(l(:,1),1)-r-s;
-tau=size(t(:,1),1)-g-c;
+s=nnz(l(:,1)==-1);
+c=nnz(t(:,1)==-1);
+r=nnz(l(:,1)==0);
+g=nnz(t(:,1)==0);
+ll=nnz(l(:,1)==1);
+tau=nnz(t(:,1)==1);
 Fsc=F(1:s,1:c);%Different necessary partitioning of F matrix;
 Frc=F(s+1:s+r,1:c);
 Frg=F(s+1:s+r,c+1:c+g);
